@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-chart-1: hsl(var(--chart-1));
+  --color-chart-2: hsl(var(--chart-2));
+  --color-chart-3: hsl(var(--chart-3));
+  --color-chart-4: hsl(var(--chart-4));
+  --color-chart-5: hsl(var(--chart-5));
+  --font-sans: var(--app-font-sans);
+  --font-mono: var(--app-font-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Arc dark theme — deep navy base, USDC green accents, Circle purple primary */
+  --background: 222 47% 5%;
+  --foreground: 210 20% 92%;
+  --border: 222 30% 14%;
+  --card: 222 40% 8%;
+  --card-foreground: 210 20% 90%;
+  --card-border: 222 30% 14%;
+  --popover: 222 40% 8%;
+  --popover-foreground: 210 20% 90%;
+  --popover-border: 222 30% 14%;
+  --primary: 258 88% 66%;      /* Circle purple */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 222 30% 14%;
+  --secondary-foreground: 210 20% 80%;
+  --muted: 222 35% 12%;
+  --muted-foreground: 210 15% 55%;
+  --accent: 160 80% 42%;       /* USDC green */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 70% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 222 30% 14%;
+  --ring: 258 88% 66%;
+  --chart-1: 258 88% 66%;
+  --chart-2: 160 80% 42%;
+  --chart-3: 200 90% 55%;
+  --chart-4: 38 95% 60%;
+  --chart-5: 0 70% 55%;
+  --app-font-sans: 'Inter', system-ui, sans-serif;
+  --app-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * { @apply border-border; }
+  body { @apply font-sans antialiased bg-background text-foreground; }
+}
+
+/* Arc glow animations */
+@keyframes arc-pulse {
+  0%, 100% { box-shadow: 0 0 8px 2px hsl(258 88% 66% / 0.3); }
+  50%       { box-shadow: 0 0 20px 6px hsl(258 88% 66% / 0.6); }
+}
+@keyframes usdc-pulse {
+  0%, 100% { box-shadow: 0 0 6px 1px hsl(160 80% 42% / 0.3); }
+  50%       { box-shadow: 0 0 18px 5px hsl(160 80% 42% / 0.6); }
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes float-up-fade {
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+
+.arc-glow    { animation: arc-pulse 2.5s ease-in-out infinite; }
+.usdc-glow   { animation: usdc-pulse 2s ease-in-out infinite; }
+.ticker-wrap { overflow: hidden; white-space: nowrap; }
+.ticker-inner { display: inline-flex; animation: ticker-scroll 28s linear infinite; }
+.float-up    { animation: float-up-fade 1.5s ease-out forwards; }
+
+/* Glass card */
+.glass {
+  background: linear-gradient(135deg, hsl(222 40% 10% / 0.9), hsl(222 40% 7% / 0.95));
+  border: 1px solid hsl(222 30% 18% / 0.8);
+  backdrop-filter: blur(12px);
+}
+
+/* Payment flow step highlight */
+.step-active {
+  background: linear-gradient(135deg, hsl(258 88% 66% / 0.15), hsl(160 80% 42% / 0.1));
+  border-color: hsl(258 88% 66% / 0.5);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(90deg, hsl(258 88% 70%), hsl(200 90% 60%), hsl(160 80% 50%));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
